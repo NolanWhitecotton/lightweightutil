@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+
+<html>
+	<head>
+		<title>Lightweight Utility</title>
+		<link rel="stylesheet" type="text/css" href="multitimer.css"/>
+		<script src="multitimer.js"></script>
+		
+		<script src="textbox.js"></script>
+	</head>
+	<body>
+		<h1 id="multitimer">Multi timer</h1>
+		<input type="button" value="+" onclick="mt_addTimer();">
+		<div id="timers" class="flex-container"></div>
+		
+		<h1 id="textbox">Text box</h1>
+		<textarea id = "textarea" style="width: 80%; height: 15em;" placeholder="Your text here." onkeyup="tb_updateCharacterCounts()"></textarea>
+		<br/>
+		<span id="characterCount">0</span> characters, <span id="wordCount">0</span> words.
+		
+		<h1 id="timecalc">Time calculator</h1>
+		<input id="time1" type="text"/>
+		<select name="action" id="action">
+		<option value="plus">+</option>
+		<option value="minus">-</option>
+		</select>
+		<input id="time2" type="text"/>
+		<footer>
+			lightweightutil is a collection of open source lightweight utility applications, with no external dependencies, ads which stores all data locally.
+		</footer>
+	</body>
+</html>
