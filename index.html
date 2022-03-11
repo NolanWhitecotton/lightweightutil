@@ -14,7 +14,24 @@
 		<noscript>JavaScript is required by many of the utilities, enable it for the best experience.</noscript>
 		<h1 id="multitimer">Multi timer</h1>
 		<input type="button" value="+" onclick="mt_addTimer();">
-		<div id="timers" class="flex-container"></div>
+		<div id="timers" class="flex-container">
+			<template id="timer_tmplt">
+				<span class="timer">
+					<input type="text" value="Timer"/>
+					<input class="x-button" type="button" value="x">
+					<br/>
+					<input type="button" class="start-button" value="start"/>
+					<span hidden class="time-display"></span>
+					<span class="time-input">
+						<input class="h-input" type="text" placeholder = "HH" style="width: 3ch;">
+						<span>:</span>
+						<input class="m-input" type="text" value=1 placeholder = "MM" style="width: 3ch;">
+						<span>:</span>
+						<input class="s-input" type="text" placeholder = "SS" style="width: 3ch;">
+					</span>
+				</span>
+			</template>
+		</div>
 		
 		<h1 id="textbox">Text box</h1>
 		<textarea id = "textarea" style="width: 80%; height: 15em;" placeholder="Your text here." onkeyup="tb_updateCharacterCounts()"></textarea>

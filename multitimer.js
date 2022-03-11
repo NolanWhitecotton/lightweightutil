@@ -50,17 +50,65 @@ function getDurationAsString(duration){
 	return output;
 }
 
+var timers = [];
+
+class Timer{
+	constructor(){
+		//init element fragment
+		let element = timer_tmplt.content.cloneNode(true);
+		this.timer = element.querySelector(".timer");//the element that this timer object corresponds to
+		
+		//add element to dom
+		document.getElementById("timers").appendChild(element);
+		
+		//element references
+		this.xButton = this.timer.querySelector(".x-button");
+		this.startButton = this.timer.querySelector(".start-button");
+		this.timeDisplay = this.timer.querySelector(".time-display");
+		this.timeInput = this.timer.querySelector(".time-input");
+		this.hInput = this.timer.querySelector(".h-input");
+		this.mInput = this.timer.querySelector(".m-input");
+		this.sInput = this.timer.querySelector(".s-input");
+		
+		//default variable values
+		this.msOffset = 0;
+		this.startdate = null;
+		this.duration = 1000*60;
+		this.interval = null;//TODO this could be done in a batches, where you iterate through all the timers in a single interval, and then update the time to save on cpu time
+		
+		//references to this object for eventlisteners
+		let _this = this;
+		
+		//event listeners
+		this.xButton.addEventListener("click", function(){
+			if(_this.startButton.value == "start"){
+				mt_deleteTimer(_this);
+			}else{
+				_this.startButton.value = "start";
+				_this.msOffset = 0;
+				_this.startdate = null;
+				clearInterval(_this.interval);
+				_this.timeInput.hidden = false;
+				_this.timeDisplay.hidden = true;
+			}
+		});
+
+		//TODO startButton click event listner
+
+	}
+}
+
 //adds a timer to the dom
 function mt_addTimer(){
-	console.log("added timer.");
+	timers.push(new Timer());
 	
 	//timer div
-	let timerDiv = document.createElement("span");
+	/*let timerDiv = document.createElement("span");
 	document.getElementById("timers").appendChild(timerDiv);
 	
 	//the name of the timer
 	let timerName = document.createElement("input");
-	timerName.type = "span";
+	timerName.type = "text";
 	timerName.value = "Timer";
 	timerDiv.appendChild(timerName);
 	
@@ -170,10 +218,20 @@ function mt_addTimer(){
 	secInput.placeholder = "SS";
 	secInput.style.width = "3ch";
 	stoppedTimerInput.appendChild(secInput);
+	*/
+	
+	console.log("added timer.");
 }
 
 //removes the element passed to it, called by the delete button on the timer
 function mt_deleteTimer(element){
+	//remove element from the timers array
+	let pos = timers.indexOf(element);
+	timers.splice(pos, 1);
+	
+	//clear its interval
 	clearInterval(element.interval);
-	element.parentNode.removeChild(element);
+	
+	//delete from DOM
+	element.timer.parentNode.removeChild(element.timer);
 }
