@@ -4,6 +4,14 @@
 
 <html>
 	<head>
+		<style>
+			.fs30b{
+				font-size: 30px;
+				font-weight: bold;
+				padding-top: 25px;
+			}
+		</style>
+
 		<title>Lightweight Utility</title>
 		<link rel="stylesheet" type="text/css" href="multitimer.css"/>
 		<script src="multitimer.js"></script>
@@ -12,7 +20,7 @@
 	</head>
 	<body>
 		<noscript>JavaScript is required by many of the utilities, enable it for the best experience.</noscript>
-		<h1 id="multitimer">Multi timer</h1>
+		<div class="fs30b" id="multitimer">Multi timer</div>
 		<input type="button" value="+" onclick="mt_addTimer();">
 		<div id="timers" class="flex-container">
 			<template id="timer_tmplt">
@@ -33,13 +41,13 @@
 			</template>
 		</div>
 		
-		<h1 id="textbox">Text box</h1>
+		<div class="fs30b" id="textbox">Text box</div>
 		<textarea id = "textarea" style="width: 80%; height: 15em;" placeholder="Your text here." onkeyup="tb_updateCharacterCounts()"></textarea>
 		<br/>
 		<span id="characterCount">0</span> characters, <span id="wordCount">0</span> words.
 		
 		<!--
-		<h1 id="timecalc">Time calculator</h1>
+		<div class="fs30b" id="timecalc">Time calculator</div>
 		<input id="time1" type="text"/>
 		<select name="action" id="action">
 		<option value="plus">+</option>
