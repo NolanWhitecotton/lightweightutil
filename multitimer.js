@@ -50,9 +50,24 @@ function getDurationAsString(duration){
 	return output;
 }
 
-var timers = [];
+var timers = [];//list of all the timers
+var timerTickInterval = null; //the interval set if any timers exist
 
 class Timer{
+	tick(){
+		if(this.startDate != null){
+			let difference = new Date()-this.startDate;
+			let timeRemaining = this.duration-(difference+this.msOffset);
+			
+			if(timeRemaining > 0){
+				this.timeDisplay.innerHTML = getDurationAsString(timeRemaining);
+			} else {
+				this.timeDisplay.innerHTML = "Timer over!";
+				this.startButton.value = "reset";
+			}
+		}
+	}
+
 	constructor(){
 		//init element fragment
 		let element = timer_tmplt.content.cloneNode(true);
@@ -72,9 +87,8 @@ class Timer{
 		
 		//default variable values
 		this.msOffset = 0;
-		this.startdate = null;
+		this.startDate = null;
 		this.duration = 1000*60;
-		this.interval = null;//TODO this could be done in a batches, where you iterate through all the timers in a single interval, and then update the time to save on cpu time
 		
 		//references to this object for eventlisteners
 		let _this = this;
@@ -86,8 +100,7 @@ class Timer{
 			}else{
 				_this.startButton.value = "start";
 				_this.msOffset = 0;
-				_this.startdate = null;
-				clearInterval(_this.interval);
+				_this.startDate = null;
 				_this.timeInput.hidden = false;
 				_this.timeDisplay.hidden = true;
 			}
@@ -104,40 +117,38 @@ class Timer{
 				}
 				
 				_this.startButton.value = "pause";
-				
 				_this.startDate = new Date();
-				_this.interval = setInterval(function(){//TODO this could be done in a batches, where you iterate through all the timers in a single interval, and then update the time to save on cpu time
-					let difference = new Date()-_this.startDate;
-					let timeRemaining = _this.duration-(difference+_this.msOffset);
-					
-					if(timeRemaining > 0){
-						_this.timeDisplay.innerHTML = getDurationAsString(timeRemaining);
-					} else {
-						_this.timeDisplay.innerHTML = "Timer over!";
-						_this.startButton.value = "reset";
-						clearInterval(_this.interval);
-					}
-				}, 100);
 			}else if(_this.startButton.value == "pause"){
 				_this.msOffset += new Date()-_this.startDate;
 				_this.startButton.value = "resume";
-				clearInterval(_this.interval);
+				_this.startDate = null;
 			}else if(_this.startButton.value == "reset"){
 	
 				_this.startButton.value = "start";
 				_this.msOffset = 0;
-				_this.startdate = null;
-				clearInterval(_this.interval);
+				_this.startDate = null;
 				_this.timeInput.hidden = false;
 				_this.timeDisplay.hidden = true;
 			}
 		});
 	}
+
 }
 
-//adds a timer to the dom
+//adds a timer
 function mt_addTimer(){
+	//create timer object
 	timers.push(new Timer());
+	
+	//set timertick interval if its not set already
+	if(timerTickInterval == null){
+		timerTickInterval = setInterval(function(){
+			for(let i=0;i<timers.length; i++){
+				timers[i].tick();
+			}
+		}, 100);
+	}
+
 	console.log("added timer.");
 }
 
@@ -147,9 +158,12 @@ function mt_deleteTimer(element){
 	let pos = timers.indexOf(element);
 	timers.splice(pos, 1);
 	
-	//clear its interval
-	clearInterval(element.interval);
-	
 	//delete from DOM
 	element.timer.parentNode.removeChild(element.timer);
+
+	//clear timer interval if there are no more timers
+	if(timers.length == 0){
+		clearInterval(timerTickInterval);
+		timerTickInterval = null;
+	}
 }
