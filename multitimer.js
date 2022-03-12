@@ -52,6 +52,8 @@ function getDurationAsString(duration){
 
 var timers = [];//list of all the timers
 var timerTickInterval = null; //the interval set if any timers exist
+var timerRingInterval = null; //the interval to check if any alarms are ringing
+var ringingTimers = 0;
 
 class Timer{
 	tick(){
@@ -64,6 +66,26 @@ class Timer{
 			} else {
 				this.timeDisplay.innerHTML = "Timer over!";
 				this.startButton.value = "reset";
+				console.log("asd?");
+				
+				
+			}
+
+			//ringing
+			//TODO make it so that the ringing can end either when you click [x] or [reset]
+			//TODO make it so that ringing continues if a timer is reset but there is still another
+			//TODO add options to change sound via url
+			//TODO add option to change how much the sound loops
+			if(this.timeDisplay.innerHTML == "Timer over!"){
+				if(timerRingInterval == null){
+					clearInterval(timerRingInterval);
+					timerRingInterval = setInterval(function(){
+						console.log("ring");
+						var audio = new Audio("pixbay-alarm-clock-short.mp3");
+						audio.play();//TODO make audio play only when nessacary 
+						
+					}, 1000);
+				}
 			}
 		}
 	}
@@ -92,7 +114,7 @@ class Timer{
 		
 		//references to this object for eventlisteners
 		let _this = this;
-		
+
 		//event listeners
 		this.xButton.addEventListener("click", function(){
 			if(_this.startButton.value == "start"){
@@ -107,6 +129,7 @@ class Timer{
 		});
 
 		this.startButton.addEventListener("click", function(){
+			test();
 			if(_this.startButton.value == "start" || _this.startButton.value == "resume"){
 				
 				if(_this.startButton.value == "start"){
@@ -123,7 +146,7 @@ class Timer{
 				_this.startButton.value = "resume";
 				_this.startDate = null;
 			}else if(_this.startButton.value == "reset"){
-	
+				clearInterval(timerRingInterval);
 				_this.startButton.value = "start";
 				_this.msOffset = 0;
 				_this.startDate = null;
