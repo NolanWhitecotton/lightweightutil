@@ -51,7 +51,10 @@ function getDurationAsString(duration){
 
 var timers = [];//list of all the timers
 var timerTickInterval = null; //the interval set if any timers exist
+
 var timerRingInterval = null; //the interval to check if any alarms are ringing
+var numberOfRingingTimers = 0; //the count of currently ringing timers
+var loadedAudio = new Audio("pixbay-alarm-clock-short.mp3"); //the audio that is played when ringing
 
 class Timer{
 	constructor(){
@@ -100,10 +103,43 @@ class Timer{
 		if(_this.startButton.value == "start"){
 			mt_deleteTimer(_this);
 		}else{
+			//remove from ringing timers if ringing
+			if(_this.startButton.value == "reset"){
+				_this.updateRinger(false);
+				this.timeDisplay.style.color = "black";
+			}
+
+			//go to edit mode
 			_this.startButton.value = "start";
 			_this.msOffset = 0;
 			_this.startDate = null;
 			_this.toggleEditMode(_this);
+		}
+	}
+
+	//function that updates the ringer when a timer is reset or deleted while ringing
+	//turnOn is weather the timer is starting ringing or stopping ringing
+	//TODO add options to change sound via url
+	//TODO add option to change how much the sound loops
+	updateRinger(turnOn){
+		if(turnOn){
+			numberOfRingingTimers++;
+		}else{
+			numberOfRingingTimers--;
+		}
+
+		//start ringing
+		if(numberOfRingingTimers>0){
+			if(timerRingInterval == null){
+				timerRingInterval = setInterval(function(){
+					loadedAudio.play();
+				}, 1000);
+			}
+		}else{
+			clearInterval(timerRingInterval);
+			timerRingInterval = null;
+			loadedAudio.pause();
+			loadedAudio.currentTime = 0;
 		}
 	}
 
@@ -123,10 +159,11 @@ class Timer{
 			_this.startButton.value = "resume";
 			_this.startDate = null;
 		}else if(_this.startButton.value == "reset"){//if timer needs to reset
-			clearInterval(timerRingInterval);
+			_this.updateRinger(false);
 			_this.startButton.value = "start";
 			_this.msOffset = 0;
 			_this.startDate = null;
+			this.timeDisplay.style.color = "black";
 			_this.toggleEditMode(_this);
 		}
 	}
@@ -139,26 +176,11 @@ class Timer{
 
 			if(timeRemaining > 0){
 				this.timeDisplay.innerHTML = getDurationAsString(timeRemaining);
-			} else {
+			} else if(this.timeDisplay.innerHTML != "Timer over!"){
 				this.timeDisplay.innerHTML = "Timer over!";
 				this.startButton.value = "reset";
-			}
-
-			//ringing
-			//TODO make it so that the ringing can end either when you click [x] or [reset]
-			//TODO make it so that ringing continues if a timer is reset but there is still another
-			//TODO add options to change sound via url
-			//TODO add option to change how much the sound loops
-			if(this.timeDisplay.innerHTML == "Timer over!"){
-				if(timerRingInterval == null){
-					clearInterval(timerRingInterval);
-					timerRingInterval = setInterval(function(){
-						console.log("ring");
-						var audio = new Audio("pixbay-alarm-clock-short.mp3");
-						audio.play();//TODO make audio play only when nessacary
-
-					}, 1000);
-				}
+				this.timeDisplay.style.color = "red";
+				this.updateRinger(true);
 			}
 		}
 	}
