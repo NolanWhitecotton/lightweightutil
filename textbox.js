@@ -90,8 +90,6 @@ function initCodeEditorListeners(){
 			codeEditor.value = start + "\n" + codeEditor.value.substring(startPos, endPos) + end;
 			codeEditor.selectionEnd = newCursorPos;
 		}
-		
-		console.log(e);
 	});	
 }
 
