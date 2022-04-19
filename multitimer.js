@@ -90,6 +90,12 @@ class Timer{
 		this.startButton.addEventListener("click", function(){
 			_this.startButtonEvent(_this);
 		});
+
+		this.timer.addEventListener("keydown", function(e){
+			if(e.code == "Enter"){
+				_this.startButtonEvent(_this);
+			}
+		});
 	}
 
 	//toggles between showing the time left and editing the duration

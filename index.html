@@ -9,6 +9,10 @@
 				font-weight: bold;
 				padding-top: 25px;
 			}
+
+			footer{
+				margin-top: 50px;
+			}
 		</style>
 
 		<title>Lightweight Utility</title>
@@ -48,14 +52,15 @@
 		
 		<!-- code editor -->
 		<div class="fs30b" id="codeEditor">Code Editor</div>
-		<textarea id = "codeEditorTextarea" style="width: 80%; height: 15em;" placeholder="Your code here."></textarea>
+		<textarea id="codeEditorTextarea" tabIndex="-1" style="width: 80%; height: 15em;" placeholder="Your code here."></textarea>
 		<br/>
-		<input type="button" value="js eval" onclick="evalTextBox()">
+		<abbr title="Use output('value') to write to the output. The return value is the return value of the last executed statement.">
+			<input type="button" value="js eval" onclick="evalTextBox()"\>
+		</abbr>
 		<br/>
 		<span id="codeEditorOutput"></span>
 		<br/>
 		<span id="codeEditorReturnValue"></span>
-		<br/>
 
 		<!--
 		<div class="fs30b" id="timecalc">Time calculator</div>
@@ -67,7 +72,7 @@
 		<input id="time2" type="text"/>
 		-->
 		<footer>
-			lightweightutil is a collection of open source lightweight utility applications, with no external dependencies, no ads, and minimal assets which stores all data locally.
+			LightweightUtil is a collection of open source lightweight utility applications, with no external dependencies, no ads, and minimal assets which stores all data locally.
 			<br/>
 			<a href="https://github.com/NolanWhitecotton/lightweightutil" target="_blank">[Source code]</a>
 		</footer>
