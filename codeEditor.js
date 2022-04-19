@@ -92,3 +92,8 @@ function initCodeEditorListeners(){
 		}
 	});	
 }
+
+function parenWrap(){
+    let codeEditor = document.getElementById("codeEditorTextarea");
+    codeEditor.value = "(" + codeEditor.value + ")";
+}

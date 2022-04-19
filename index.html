@@ -55,8 +55,9 @@
 		<textarea id="codeEditorTextarea" tabIndex="-1" style="width: 80%; height: 15em;" placeholder="Your code here."></textarea>
 		<br/>
 		<abbr title="Use output('value') to write to the output. The return value is the return value of the last executed statement.">
-			<input type="button" value="js eval" onclick="evalTextBox()"\>
+			<input type="button" value="js eval" onclick="evalTextBox()"/>
 		</abbr>
+		<input type="button" value="wrap in ()" onclick="parenWrap()"/>
 		<br/>
 		<span id="codeEditorOutput"></span>
 		<br/>
