@@ -1,0 +1,66 @@
+.fs30b{
+    font-size: 30px;
+    font-weight: bold;
+    padding-top: 25px;
+}
+
+body {
+    background-color: rgb(22, 22, 22);
+    color: white;
+    display: block;
+}
+
+text {
+    color: white;
+}
+
+textarea, input {
+    background-color: rgb(59, 59, 59);
+    color: white;
+    border: 0px;
+}
+
+textarea {
+    width: 80%; 
+    height: 15em;
+}
+
+.button { 
+    background: rgb(59, 59, 59);
+    color: white;
+    border: 1px solid rgb(87, 87, 87);
+}
+
+abbr {
+    text-decoration: none;
+}
+
+a {
+    color: lightblue;
+}
+
+footer {
+    background-color:black;
+
+    position: absolute;
+    left: 0px;
+
+    /* height: 100vh; */
+    /* min-height: 100%; */
+    min-width: 100%;
+    padding-top: 10px;
+    margin-top: 50px;
+
+    /* display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: space-between; */
+
+}
+
+footer > span, a {
+    display: block;
+    padding-left: 6em;
+    padding-right: 6em;
+    padding-bottom: 1em;
+}

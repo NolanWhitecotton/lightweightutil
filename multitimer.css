@@ -1,11 +1,15 @@
 .flex-container {
 	display: flex;
 	flex-wrap: wrap;
-	
 }
 
 .flex-container > span {
 	width: auto;
-	padding-bottom: 50px;
+	padding-bottom: 10px;
 	padding-right: 50px;
+	padding-top: 10px;
+}
+
+.width2{
+	width: 3ch;
 }

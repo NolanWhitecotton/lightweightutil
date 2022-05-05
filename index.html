@@ -3,19 +3,10 @@
 	<head>
 		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 		<meta content="utf-8" http-equiv="encoding">
-		<style>
-			.fs30b{
-				font-size: 30px;
-				font-weight: bold;
-				padding-top: 25px;
-			}
-
-			footer{
-				margin-top: 50px;
-			}
-		</style>
+		<meta name="viewport" content="initial-scale=1">
 
 		<title>Lightweight Utility</title>
+		<link rel="stylesheet" type="text/css" href="dashboard.css"/>
 		<link rel="stylesheet" type="text/css" href="multitimer.css"/>
 		<script src="multitimer.js" type="text/javascript"></script>
 		<script src="textbox.js" type="text/javascript"></script>
@@ -24,21 +15,21 @@
 	<body onload="initCodeEditorListeners()">
 		<noscript>JavaScript is required by many of the utilities, enable it for the best experience.</noscript>
 		<div class="fs30b" id="multitimer">Multi timer</div>
-		<input type="button" value="+" onclick="mt_addTimer();">
+		<input type="button" class="button" value="+" onclick="mt_addTimer();">
 		<div id="timers" class="flex-container">
 			<template id="timer_tmplt">
 				<span class="timer">
 					<input type="text" value="Timer"/>
-					<input class="x-button" type="button" value="x">
+					<input class="x-button button" type="button" value="x">
 					<br/>
-					<input type="button" class="start-button" value="start"/>
+					<input type="button" class="start-button button" value="start"/>
 					<span hidden class="time-display"></span>
 					<span class="time-input">
-						<input class="h-input" type="text" placeholder = "HH" style="width: 3ch;">
+						<input class="h-input width2" type="text" placeholder = "HH">
 						<span>:</span>
-						<input class="m-input" type="text" value=1 placeholder = "MM" style="width: 3ch;">
+						<input class="m-input width2" type="text" value=1 placeholder = "MM">
 						<span>:</span>
-						<input class="s-input" type="text" placeholder = "SS" style="width: 3ch;">
+						<input class="s-input width2" type="text" placeholder = "SS">
 					</span>
 				</span>
 			</template>
@@ -46,20 +37,20 @@
 		
 		<!-- text box -->
 		<div class="fs30b" id="textbox">Text box</div>
-		<textarea id = "textarea" style="width: 80%; height: 15em;" placeholder="Your text here." onkeyup="tb_updateCharacterCounts()"></textarea>
+		<textarea id = "textarea" placeholder="Your text here." onkeyup="tb_updateCharacterCounts()"></textarea>
 		<br/>
 		<span id="characterCount">0</span> characters, <span id="wordCount">0</span> words.
 		<br/>
-		<input type="button" value="sort lines" onclick="tb_alphabetizeLines()">
+		<input type="button" class="button" value="sort lines" onclick="tb_alphabetizeLines()">
 		
 		<!-- code editor -->
 		<div class="fs30b" id="codeEditor">Code Editor</div>
-		<textarea id="codeEditorTextarea" tabIndex="-1" style="width: 80%; height: 15em;" placeholder="Your code here."></textarea>
+		<textarea id="codeEditorTextarea" tabIndex="-1" placeholder="Your code here."></textarea>
 		<br/>
 		<abbr title="Use output('value') to write to the output. The return value is the return value of the last executed statement.">
-			<input type="button" value="js eval" onclick="evalTextBox()"/>
+			<input type="button" class="button" value="js eval" onclick="evalTextBox()"/>
 		</abbr>
-		<input type="button" value="wrap in ()" onclick="parenWrap()"/>
+		<input type="button" class="button" value="wrap in ()" onclick="parenWrap()"/>
 		<br/>
 		<span id="codeEditorOutput"></span>
 		<br/>
@@ -75,8 +66,7 @@
 		<input id="time2" type="text"/>
 		-->
 		<footer>
-			LightweightUtil is a collection of open source lightweight utility applications, with no external dependencies, no ads, and minimal assets which stores all data locally.
-			<br/>
+			<span>LightweightUtil is a collection of open source lightweight utility applications, with no external dependencies, no ads, and minimal assets which stores all data locally.</span>
 			<a href="https://github.com/NolanWhitecotton/lightweightutil" target="_blank">[Source code]</a>
 		</footer>
 	</body>
