@@ -14,47 +14,53 @@
 	</head>
 	<body onload="initCodeEditorListeners()">
 		<noscript>JavaScript is required by many of the utilities, enable it for the best experience.</noscript>
-		<div class="fs30b" id="multitimer">Multi timer</div>
-		<input type="button" class="button" value="+" onclick="mt_addTimer();">
-		<div id="timers" class="flex-container">
-			<template id="timer_tmplt">
-				<span class="timer">
-					<input type="text" value="Timer"/>
-					<input class="x-button button" type="button" value="x">
-					<br/>
-					<input type="button" class="start-button button" value="start"/>
-					<span hidden class="time-display"></span>
-					<span class="time-input">
-						<input class="h-input width2" type="text" placeholder = "HH">
-						<span>:</span>
-						<input class="m-input width2" type="text" value=1 placeholder = "MM">
-						<span>:</span>
-						<input class="s-input width2" type="text" placeholder = "SS">
+		<div class="module">
+			<div class="fs30b" id="multitimer">Multi timer</div>
+			<input type="button" class="button" value="+" onclick="mt_addTimer();">
+			<div id="timers" class="flex-container">
+				<template id="timer_tmplt">
+					<span class="timer">
+						<input type="text" value="Timer"/>
+						<input class="x-button button" type="button" value="x">
+						<br/>
+						<input type="button" class="start-button button" value="start"/>
+						<span hidden class="time-display"></span>
+						<span class="time-input">
+							<input class="h-input width2" type="text" placeholder = "HH">
+							<span>:</span>
+							<input class="m-input width2" type="text" value=1 placeholder = "MM">
+							<span>:</span>
+							<input class="s-input width2" type="text" placeholder = "SS">
+						</span>
 					</span>
-				</span>
-			</template>
+				</template>
+			</div>
 		</div>
 		
 		<!-- text box -->
-		<div class="fs30b" id="textbox">Text box</div>
-		<textarea id = "textarea" placeholder="Your text here." onkeyup="tb_updateCharacterCounts()"></textarea>
-		<br/>
-		<span id="characterCount">0</span> characters, <span id="wordCount">0</span> words.
-		<br/>
-		<input type="button" class="button" value="sort lines" onclick="tb_alphabetizeLines()">
-		
+		<div class="module">
+			<div class="fs30b" id="textbox">TextBox</div>
+			<textarea id = "textarea" placeholder="Your text here." onkeyup="tb_updateCharacterCounts()"></textarea>
+			<br/>
+			<span id="characterCount">0</span> characters, <span id="wordCount">0</span> words.
+			<br/>
+			<input type="button" class="button" value="sort lines" onclick="tb_alphabetizeLines()">
+		</div>
+
 		<!-- code editor -->
-		<div class="fs30b" id="codeEditor">Code Editor</div>
-		<textarea id="codeEditorTextarea" tabIndex="-1" placeholder="Your code here."></textarea>
-		<br/>
-		<abbr title="Use output('value') to write to the output. The return value is the return value of the last executed statement.">
-			<input type="button" class="button" value="js eval" onclick="evalTextBox()"/>
-		</abbr>
-		<input type="button" class="button" value="wrap in ()" onclick="parenWrap()"/>
-		<br/>
-		<span id="codeEditorOutput"></span>
-		<br/>
-		<span id="codeEditorReturnValue"></span>
+		<div class="module">
+			<div class="fs30b" id="codeEditor">Code Editor</div>
+			<textarea id="codeEditorTextarea" tabIndex="-1" placeholder="Your code here."></textarea>
+			<br/>
+			<abbr title="Use output('value') to write to the output. The return value is the return value of the last executed statement.">
+				<input type="button" class="button" value="js eval" onclick="evalTextBox()"/>
+			</abbr>
+			<input type="button" class="button" value="wrap in ()" onclick="parenWrap()"/>
+			<br/>
+			<span id="codeEditorOutput"></span>
+			<br/>
+			<span id="codeEditorReturnValue"></span>
+		</div>
 
 		<!--
 		<div class="fs30b" id="timecalc">Time calculator</div>
