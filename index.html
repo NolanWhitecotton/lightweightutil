@@ -15,6 +15,7 @@
 	</head>
 	<body onload="initCodeEditorListeners()">
 		<noscript>JavaScript is required by many of the utilities, enable it for the best experience.</noscript>
+		<!-- Multi timer -->
 		<div class="module">
 			<div class="fs30b" id="multitimer">Multi timer</div>
 			<input type="button" class="button" value="+" onclick="mt_addTimer();">
@@ -45,7 +46,7 @@
 			<br/>
 			<span id="characterCount">0</span> characters, <span id="wordCount">0</span> words.
 			<br/>
-			<input type="button" class="button" value="sort lines" onclick="tb_alphabetizeLines()">
+			<input type="button" class="button" value="Sort lines" onclick="tb_alphabetizeLines()">
 		</div>
 
 		<!-- code editor -->
@@ -54,22 +55,24 @@
 			<textarea id="codeEditorTextarea" tabIndex="-1" placeholder="Your code here."></textarea>
 			<br/>
 			<abbr title="Use output('value') to write to the output. The return value is the return value of the last executed statement.">
-				<input type="button" class="button" value="js eval" onclick="evalTextBox()"/>
+				<input type="button" class="button" value="JS eval" onclick="evalTextBox()"/>
 			</abbr>
-			<input type="button" class="button" value="wrap in ()" onclick="parenWrap()"/>
+			<input type="button" class="button" value="Wrap in ()" onclick="parenWrap()"/>
 			<br/>
 			<span id="codeEditorOutput"></span>
 			<br/>
 			<span id="codeEditorReturnValue"></span>
 		</div>
 
+		<!-- keycode reader -->
 		<div class="module">
 			<div class="fs30b">KeyCode Reader</div>
 			<input type="text" id="keycodeReader" placeholder="Click here" tabindex="-1"/>
 			<div id="keycodeOutput"></div>
-			<input type="button" id="resetKeyCodeOutput" hidden class="button" value="reset" onclick="resetKeyCodeOutput()"/>
+			<input type="button" id="resetKeyCodeOutput" hidden class="button" value="Reset" onclick="resetKeyCodeOutput()"/>
 		</div>
 
+		<!-- time calculator -->
 		<!--
 		<div class="fs30b" id="timecalc">Time calculator</div>
 		<input id="time1" type="text"/>

@@ -9,8 +9,8 @@ body {
     display: block;
 }
 
-text {
-    color: white;
+text, span {
+    color: white !important; /*not sure why this needs to be important*/
 }
 
 textarea, input {
