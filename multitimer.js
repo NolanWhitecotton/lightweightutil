@@ -110,13 +110,13 @@ class Timer{
 			mt_deleteTimer(_this);
 		}else{
 			//remove from ringing timers if ringing
-			if(_this.startButton.value == "reset"){
+			if(_this.startButton.value == "Reset"){
 				_this.updateRinger(false);
 				this.timeDisplay.style.color = "black";
 			}
 
 			//go to edit mode
-			_this.startButton.value = "start";
+			_this.startButton.value = "Start";
 			_this.msOffset = 0;
 			_this.startDate = null;
 			_this.toggleEditMode(_this);
@@ -151,22 +151,22 @@ class Timer{
 
 	//function that is called when the start button is clicked
 	startButtonEvent(_this){
-		if(_this.startButton.value == "start" || _this.startButton.value == "resume"){//if timer should resume
-			if(_this.startButton.value == "start"){//if timer needs to read duration
+		if(_this.startButton.value == "Start" || _this.startButton.value == "Resume"){//if timer should resume
+			if(_this.startButton.value == "Start"){//if timer needs to read duration
 				_this.duration=createDuration(_this.hInput.value, _this.mInput.value, _this.sInput.value).totalMS;
 				_this.timeDisplay.innerHTML = getDurationAsString(_this.duration);
 				_this.toggleEditMode(_this);
 			}
 
-			_this.startButton.value = "pause";
+			_this.startButton.value = "Pause";
 			_this.startDate = new Date();
-		}else if(_this.startButton.value == "pause"){//if timer needs to pause
+		}else if(_this.startButton.value == "Pause"){//if timer needs to pause
 			_this.msOffset += new Date()-_this.startDate;
-			_this.startButton.value = "resume";
+			_this.startButton.value = "Resume";
 			_this.startDate = null;
-		}else if(_this.startButton.value == "reset"){//if timer needs to reset
+		}else if(_this.startButton.value == "Reset"){//if timer needs to reset
 			_this.updateRinger(false);
-			_this.startButton.value = "start";
+			_this.startButton.value = "Start";
 			_this.msOffset = 0;
 			_this.startDate = null;
 			this.timeDisplay.style.color = "black";
@@ -184,7 +184,7 @@ class Timer{
 				this.timeDisplay.innerHTML = getDurationAsString(timeRemaining);
 			} else if(this.timeDisplay.innerHTML != "Timer over!"){
 				this.timeDisplay.innerHTML = "Timer over!";
-				this.startButton.value = "reset";
+				this.startButton.value = "Reset";
 				this.timeDisplay.style.color = "red";
 				this.updateRinger(true);
 			}
@@ -205,8 +205,6 @@ function mt_addTimer(){
 			}
 		}, 100);
 	}
-
-	console.log("added timer.");
 }
 
 //removes the element passed to it, called by the delete button on the timer
