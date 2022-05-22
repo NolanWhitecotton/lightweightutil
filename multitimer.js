@@ -41,7 +41,9 @@ function getDurationAsString(duration){
 	//handle negative durations
 	if(duration<0){
 		duration = Math.abs(duration);
-		output += "-";
+		if(duration >= 1000){
+			output += "-";
+		}
 	}
 
 	let dur = getDurationFromMS(duration);
@@ -118,7 +120,6 @@ class Timer{
 		}else{
 			//remove from ringing timers if ringing
 			if(_this.startButton.value == "Reset"){
-				console.log("two");
 				_this.updateRinger(_this, false);
 				this.timeDisplay.style.color = "white";
 			}
@@ -150,6 +151,8 @@ class Timer{
 		//start ringing
 		if(numberOfRingingTimers>0){
 			if(timerRingInterval == null){
+				loadedAudio.play();//ring immediately 
+				//schedule rings every 1000ms until reset
 				timerRingInterval = setInterval(function(){
 					loadedAudio.play();
 				}, 1000);
