@@ -1,5 +1,5 @@
 function evalTextBox(){
-	let shouldContinue = confirm("This is unsafe, do not use this function unless you know exactly what the code is doing. Would you like to proceed?");
+	let shouldContinue = confirm("Eval can be unsafe, do not use this function unless you know exactly what the code is doing. Would you like to proceed?");
 	//let shouldContinue = true;//skip the confirmation
 
 	if(shouldContinue){
@@ -13,7 +13,7 @@ function evalTextBox(){
 		let input = document.getElementById("codeEditorTextarea").value;
 		//reset output span
 		outputDiv.innerHTML = "";
-		outputDiv.style.color = "black";
+		outputDiv.style.color = "white";
 		
 		//eval, catch errors and set output to red
 		let retunVal;
