@@ -16,7 +16,7 @@ function evalTextBox(){
 		outputDiv.style.color = "white";
 		
 		//eval, catch errors and set output to red
-		let retunVal;
+		let returnVal;
 		try{
 			returnVal = eval(input);
 		}catch(error){
@@ -89,6 +89,9 @@ function initCodeEditorListeners(){
 			//duplicate the line right after the current line
 			codeEditor.value = start + "\n" + codeEditor.value.substring(startPos, endPos) + end;
 			codeEditor.selectionEnd = newCursorPos;
+		}else if(e.code == "KeyR" && e.ctrlKey){
+			e.preventDefault();
+			evalTextBox();
 		}
 	});	
 }
