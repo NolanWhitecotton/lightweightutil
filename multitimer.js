@@ -1,5 +1,3 @@
-console.log("multitimer loaded.");
-
 //adds 0s to the begining of a number such that the minimum width is width
 function LeftZeroFillNumber(num, width){
 	let string = "" + num;
@@ -38,9 +36,17 @@ function getDurationFromMS(ms){
 
 //converts a duration in ms to a string in HH:MM:SS
 function getDurationAsString(duration){
+	let output = "";
+
+	//handle negative durations
+	if(duration<0){
+		duration = Math.abs(duration);
+		output += "-";
+	}
+
 	let dur = getDurationFromMS(duration);
 
-	let output = LeftZeroFillNumber(dur.hours, 2);
+	output += LeftZeroFillNumber(dur.hours, 2);
 	output += ":";
 	output += LeftZeroFillNumber(dur.minutes, 2);
 	output += ":";
@@ -78,6 +84,7 @@ class Timer{
 		this.msOffset = 0;
 		this.startDate = null;
 		this.duration = 1000*60;
+		this.ringing = false;
 
 		//references to this object for eventlisteners
 		let _this = this;
@@ -106,13 +113,14 @@ class Timer{
 
 	//function that is called when the x button is clicked
 	resetEvent(_this){
-		if(_this.startButton.value == "start"){
+		if(_this.startButton.value == "Start"){
 			mt_deleteTimer(_this);
 		}else{
 			//remove from ringing timers if ringing
 			if(_this.startButton.value == "Reset"){
-				_this.updateRinger(false);
-				this.timeDisplay.style.color = "black";
+				console.log("two");
+				_this.updateRinger(_this, false);
+				this.timeDisplay.style.color = "white";
 			}
 
 			//go to edit mode
@@ -127,7 +135,12 @@ class Timer{
 	//turnOn is weather the timer is starting ringing or stopping ringing
 	//TODO add options to change sound via url
 	//TODO add option to change how much the sound loops
-	updateRinger(turnOn){
+	updateRinger(_this, turnOn){
+		//don't do anything if _this.ringing is already what it should be set to
+		if(turnOn==_this.ringing){
+			return;
+		}
+
 		if(turnOn){
 			numberOfRingingTimers++;
 		}else{
@@ -147,6 +160,8 @@ class Timer{
 			loadedAudio.pause();
 			loadedAudio.currentTime = 0;
 		}
+		_this.ringing = turnOn;
+
 	}
 
 	//function that is called when the start button is clicked
@@ -165,11 +180,12 @@ class Timer{
 			_this.startButton.value = "Resume";
 			_this.startDate = null;
 		}else if(_this.startButton.value == "Reset"){//if timer needs to reset
-			_this.updateRinger(false);
+			//TODO should this be using resetEvent(_this)?
+			_this.updateRinger(_this, false);
 			_this.startButton.value = "Start";
 			_this.msOffset = 0;
 			_this.startDate = null;
-			this.timeDisplay.style.color = "black";
+			this.timeDisplay.style.color = "white";
 			_this.toggleEditMode(_this);
 		}
 	}
@@ -180,13 +196,11 @@ class Timer{
 			let difference = new Date()-this.startDate;
 			let timeRemaining = this.duration-(difference+this.msOffset);
 
-			if(timeRemaining > 0){
-				this.timeDisplay.innerHTML = getDurationAsString(timeRemaining);
-			} else if(this.timeDisplay.innerHTML != "Timer over!"){
-				this.timeDisplay.innerHTML = "Timer over!";
+			this.timeDisplay.innerHTML = getDurationAsString(timeRemaining);
+			if(timeRemaining <= 0){
 				this.startButton.value = "Reset";
 				this.timeDisplay.style.color = "red";
-				this.updateRinger(true);
+				this.updateRinger(this, true);
 			}
 		}
 	}
