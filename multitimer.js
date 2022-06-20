@@ -71,7 +71,7 @@ class Timer{
 		this.timer = element.querySelector(".timer");//the element that this timer object corresponds to
 
 		//add element to dom
-		document.getElementById("timers").appendChild(element);
+		document.getElementById("timers").insertBefore(element, document.getElementById("insertButton"));
 
 		//element references
 		this.xButton = this.timer.querySelector(".x-button");
