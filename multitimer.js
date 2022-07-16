@@ -16,6 +16,14 @@ function createDuration(h,m,s){
 	return {hours: h, minutes: m, seconds: s, totalMS: ms};
 }
 
+//show confirmation before reloading/closing the tab when there are timers
+window.onbeforeunload = function (event) {
+	if(timerTickInterval != null){
+		event.preventDefault();
+		return "There are currently timers running, are you sure you would like to exit?";
+	}
+}
+
 //converts a duration in ms to a duration object
 function getDurationFromMS(ms){
 	let MS_PER_SEC = 1000;
