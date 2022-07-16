@@ -177,9 +177,15 @@ class Timer{
 
 	//function that is called when the start button is clicked
 	startButtonEvent(_this){
+		//strip non-numeric characters from time
+		let  pattern = /\D/g;
+		let hours = _this.hInput.value.replace(pattern, "");
+		let mins = _this.mInput.value.replace(pattern, "");
+		let secs = _this.sInput.value.replace(pattern, "");
+
 		if(_this.startButton.value == "Start" || _this.startButton.value == "Resume"){//if timer should resume
 			if(_this.startButton.value == "Start"){//if timer needs to read duration
-				_this.duration=createDuration(_this.hInput.value, _this.mInput.value, _this.sInput.value).totalMS;
+				_this.duration=createDuration(hours, mins, secs).totalMS;
 				_this.timeDisplay.innerHTML = getDurationAsString(_this.duration);
 				_this.toggleEditMode(_this);
 			}
