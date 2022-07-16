@@ -109,7 +109,7 @@ class Timer{
 		});
 
 		this.timer.addEventListener("keydown", function(e){
-			if(e.code == "Enter"){
+			if(e.code == "Enter" || e.code == "NumpadEnter"){
 				_this.startButtonEvent(_this);
 			}
 		});
